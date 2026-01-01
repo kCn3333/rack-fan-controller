@@ -105,7 +105,7 @@ sensor:
       - script.execute: auto_control_script
 
   - platform: wifi_signal
-    name: "90 📶 WiFi Signal"
+    name: "90 🛜 WiFi Signal"
     update_interval: 60s
 
   - platform: uptime
@@ -195,7 +195,7 @@ script:
 # ============================================
 switch:
   - platform: template
-    name: "10 ⚙ Auto Control"
+    name: "10 ⚙️ Auto Control"
     id: auto_control
     optimistic: true
     restore_mode: RESTORE_DEFAULT_OFF
@@ -221,30 +221,33 @@ switch:
 # ============================================
 number:
   - platform: template
-    name: "20 🔥 Temp Start"
+    name: "20 🟢🌡 Temp Start"
     id: temp_threshold_1
     min_value: 20
     max_value: 50
     step: 1
     initial_value: 30
+    restore_value: false
     optimistic: true
 
   - platform: template
-    name: "21 🔥 Temp Medium"
+    name: "21 🟡🌡 Temp Medium"
     id: temp_threshold_2
     min_value: 30
     max_value: 60
     step: 1
     initial_value: 40
+    restore_value: false
     optimistic: true
 
   - platform: template
-    name: "22 🔥 Temp High"
+    name: "22 🔴🌡 Temp High"
     id: temp_threshold_3
     min_value: 40
     max_value: 80
     step: 1
     initial_value: 50
+    restore_value: false
     optimistic: true
 
   - platform: template
@@ -254,6 +257,7 @@ number:
     max_value: 60
     step: 5
     initial_value: 30
+    restore_value: false
     optimistic: true
 
   - platform: template
@@ -263,6 +267,7 @@ number:
     max_value: 80
     step: 5
     initial_value: 60
+    restore_value: false
     optimistic: true
 
   - platform: template
@@ -272,6 +277,7 @@ number:
     max_value: 100
     step: 5
     initial_value: 100
+    restore_value: false
     optimistic: true
 
 # ============================================
@@ -282,7 +288,7 @@ button:
     name: "92 🔄 Restart Controller"
 
   - platform: template
-    name: "93 🧪 Test Fans"
+    name: "93 🚀 Test Fans"
     on_press:
       - switch.turn_off: auto_control
       - fan.turn_on:
