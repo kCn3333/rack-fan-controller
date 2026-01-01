@@ -1,10 +1,13 @@
 # ESP32 PWM Fan Controller with Temperature Monitoring
 
+<div align="center">
+
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![ESPHome](https://img.shields.io/badge/ESPHome-2025.12.3-blue.svg)
 ![Platform](https://img.shields.io/badge/platform-ESP32-blue.svg)
 
-A smart, temperature-based PWM fan controller for server racks cooling systems, built with ESP32 and integrated with Home Assistant via ESPHome.
+</div>
+ESPHome-based fan controller designed for my homelab rack enclosure. This project automates thermal management using ESP32, DS18B20 temperature sensors, and PWM-controlled fans, fully integrated with Home Assistant.
 
 ## Features
 
