@@ -132,13 +132,13 @@ output:
 fan:
   - platform: speed
     output: fan_top_pwm
-    name: "40 🌀 Fan TOP"
+    name: "40 𖣘 Fan TOP"
     id: fan_top
     restore_mode: ALWAYS_OFF
 
   - platform: speed
     output: fan_down_pwm
-    name: "41 🌀 Fan BOTTOM"
+    name: "41 𖣘 Fan BOTTOM"
     id: fan_down
     restore_mode: ALWAYS_OFF
 
@@ -248,7 +248,7 @@ number:
     optimistic: true
 
   - platform: template
-    name: "30 🌀 Fan Speed Low"
+    name: "30 𖣘 Fan Speed Low"
     id: fan_speed_1
     min_value: 20
     max_value: 60
@@ -257,7 +257,7 @@ number:
     optimistic: true
 
   - platform: template
-    name: "31 🌀 Fan Speed Medium"
+    name: "31 𖣘 Fan Speed Medium"
     id: fan_speed_2
     min_value: 40
     max_value: 80
@@ -266,7 +266,7 @@ number:
     optimistic: true
 
   - platform: template
-    name: "32 🌀 Fan Speed High"
+    name: "32 𖣘 Fan Speed High"
     id: fan_speed_3
     min_value: 60
     max_value: 100
