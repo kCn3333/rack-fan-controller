@@ -1,4 +1,4 @@
-# ESP32 PWM Fan Controller with Temperature Monitoring
+# 𖣘 ESP32 PWM Fan Controller with Temperature Monitoring
 
 <div align="center">
 
