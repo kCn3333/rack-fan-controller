@@ -143,7 +143,7 @@ fan:
     restore_mode: ALWAYS_OFF
 
 # ============================================
-# SCRIPT – AUTO CONTROL WITH 3°C HYSTERESIS
+# SCRIPT – AUTO CONTROL WITH STABLE HYSTERESIS
 # ============================================
 script:
   - id: auto_control_script
@@ -157,37 +157,48 @@ script:
                 float temp = id(temp_max).state;
                 if (isnan(temp)) return;
 
-                float t1 = id(temp_threshold_1).state;
-                float t2 = id(temp_threshold_2).state;
-                float t3 = id(temp_threshold_3).state;
+                float t1 = id(temp_threshold_1).state;          // 30
+                float t2 = id(temp_threshold_2).state;          // 40
+                float t3 = id(temp_threshold_3).state;          // 50
 
                 float s1 = id(fan_speed_1).state;
                 float s2 = id(fan_speed_2).state;
                 float s3 = id(fan_speed_3).state;
 
-                const float H = 3.0;
-                float new_speed = id(last_fan_speed);
+                const float H = 2.0;                            // HYSTERESIS
+                float current_speed = id(last_fan_speed);
+                float new_speed = current_speed;
 
-                if (temp < (t1 - H)) new_speed = 0;
-                else if (temp < (t2 - H)) new_speed = s1;
-                else if (temp < (t3 - H)) new_speed = s2;
-                else if (temp >= t3) new_speed = s3;
 
-                if (new_speed != id(last_fan_speed)) {
-                  id(last_fan_speed) = new_speed;
+                if (temp >= t3) {
+                    new_speed = s3;
+                } else if (temp >= t2) {
 
-                  if (new_speed > 0) {
-                    auto c1 = id(fan_top).turn_on();
-                    c1.set_speed(new_speed);
-                    c1.perform();
+                    if (current_speed == s3 && temp > (t3 - H)) new_speed = s3;
+                    else new_speed = s2;
+                } else if (temp >= t1) {
 
-                    auto c2 = id(fan_down).turn_on();
-                    c2.set_speed(new_speed);
-                    c2.perform();
-                  } else {
-                    id(fan_top).turn_off().perform();
-                    id(fan_down).turn_off().perform();
-                  }
+                    if (current_speed == s2 && temp > (t2 - H)) new_speed = s2;
+                    else new_speed = s1;
+                } else if (temp < (t1 - H)) {
+
+                    new_speed = 0;
+                }
+
+                if (new_speed != current_speed) {
+                    id(last_fan_speed) = new_speed;
+                    if (new_speed > 0) {
+                        auto c1 = id(fan_top).turn_on();
+                        c1.set_speed(new_speed);
+                        c1.perform();
+
+                        auto c2 = id(fan_down).turn_on();
+                        c2.set_speed(new_speed);
+                        c2.perform();
+                    } else {
+                        id(fan_top).turn_off().perform();
+                        id(fan_down).turn_off().perform();
+                    }
                 }
 
 # ============================================
